@@ -1,7 +1,8 @@
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, } from 'react';
 import { PostForm } from './components/PostForm'
 import { PostItem } from './components/PostItem';
 import { Post } from './types/Post'
+import { api } from './api';
 
 const App = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -15,20 +16,14 @@ const App = () => {
 
   const loadPosts = async () => {
     setLoading(true)
-    let response = await fetch('https://jsonplaceholder.typicode.com/posts')
-    let json = await response.json();
+    let json = await api.getAllPost();
     setLoading(false)
     setPosts(json)
   }
 
   const handleAddPost = async (title: string, body: string) => {
-    let response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: 'POST',
-      body: JSON.stringify({ title, body, userId: 1 }),
-      headers: { 'content-type': 'application/json' }
-    });
-    let json = await response.json();
 
+    let json = await api.addNewPost(title, body, 1);
     if (json.id) {
       alert("POST adicionado com sucesso!");
     } else {
@@ -50,7 +45,7 @@ const App = () => {
           Total de Posts: {posts.length}
           <div>
             {posts.map((item, index) => (
-             <PostItem data={item} key={index} />
+              <PostItem data={item} key={index} />
             ))}
           </div>
         </>

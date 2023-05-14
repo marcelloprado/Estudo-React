@@ -5,18 +5,15 @@ import { useState, ChangeEvent } from 'react';
     }
 
 export const PostForm = ({ onAdd }: Props) => {
-
     const [addTitleText, setaddTitleText] = useState('');
     const [addBodyText, setaddBodyText] = useState('');
 
     const handleAddTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setaddTitleText(e.target.value);
     }
-
     const handleAddBodyChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setaddBodyText(e.target.value);
     }
-
     const handleAddClick = () => {
         if(addTitleText && addBodyText) {
            onAdd(addTitleText, addBodyText) 
