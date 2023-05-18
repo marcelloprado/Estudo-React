@@ -9,9 +9,9 @@ const http = axios.create({
 export const api = {
     getAllPost: async () => {
                 //COM AXIOS
-           let response = await http.get(`/post`)
-        // let response = await axios.get(`${BASE}/posts`)
-        return response.data;
+           let response = await http.get(`/posts`)
+           // let response = await axios.get(`${BASE}/posts`)
+           return response.data;
         
                 //COM FETCH
         /* 
@@ -22,7 +22,7 @@ export const api = {
     },
     addNewPost: async (title: string, body: string, userId: number) => {
                 //COM AXIOS
-        let response = await axios.post(`${http}/posts`, { title, body, userId
+        let response = await http.post(`/posts`, { title, body, userId
         });
         return response.data
         
